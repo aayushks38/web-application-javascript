@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 14 - Student Grade Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        .result-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-label {
+            font-weight: 500;
+            color: #333;
+        }
+        .result-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .grade-box {
+            margin-top: 20px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .grade-label {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .grade-value {
+            font-size: 4em;
+            font-weight: bold;
+        }
+        .grade-A { color: #28a745; }
+        .grade-B { color: #17a2b8; }
+        .grade-C { color: #ffc107; }
+        .grade-D { color: #fd7e14; }
+        .grade-F { color: #dc3545; }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 14</h1>
+        <p class="subtitle">Student Grade Calculator</p>
+        
+        <div class="input-group">
+            <label for="subject1">Subject 1 Marks (out of 100):</label>
+            <input type="number" id="subject1" placeholder="Enter marks" min="0" max="100">
+        </div>
+        
+        <div class="input-group">
+            <label for="subject2">Subject 2 Marks (out of 100):</label>
+            <input type="number" id="subject2" placeholder="Enter marks" min="0" max="100">
+        </div>
+        
+        <div class="input-group">
+            <label for="subject3">Subject 3 Marks (out of 100):</label>
+            <input type="number" id="subject3" placeholder="Enter marks" min="0" max="100">
+        </div>
+        
+        <div class="input-group">
+            <label for="subject4">Subject 4 Marks (out of 100):</label>
+            <input type="number" id="subject4" placeholder="Enter marks" min="0" max="100">
+        </div>
+        
+        <div class="input-group">
+            <label for="subject5">Subject 5 Marks (out of 100):</label>
+            <input type="number" id="subject5" placeholder="Enter marks" min="0" max="100">
+        </div>
+        
+        <button class="btn" onclick="calculateGrade()">Calculate Grade</button>
+        
+        <div class="result" id="result"></div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        // Function to calculate total
+        function calculateTotal(marks) {
+            let total = 0;
+            for (let i = 0; i < marks.length; i++) {
+                total += marks[i];
+            }
+            return total;
+        }
+
+        // Function to calculate average
+        function calculateAverage(total, count) {
+            return total / count;
+        }
+
+        // Function to calculate percentage
+        function calculatePercentage(total, maxMarks) {
+            return (total / maxMarks) * 100;
+        }
+
+        // Function to determine grade using conditional statements
+        function determineGrade(percentage) {
+            if (percentage >= 90) {
+                return 'A';
+            } else if (percentage >= 80) {
+                return 'B';
+            } else if (percentage >= 70) {
+                return 'C';
+            } else if (percentage >= 60) {
+                return 'D';
+            } else {
+                return 'F';
+            }
+        }
+
+        // Main calculation function
+        function calculateGrade() {
+            const marks = [
+                parseFloat(document.getElementById('subject1').value),
+                parseFloat(document.getElementById('subject2').value),
+                parseFloat(document.getElementById('subject3').value),
+                parseFloat(document.getElementById('subject4').value),
+                parseFloat(document.getElementById('subject5').value)
+            ];
+            
+            // Validate inputs
+            for (let i = 0; i < marks.length; i++) {
+                if (isNaN(marks[i]) || marks[i] < 0 || marks[i] > 100) {
+                    alert('Please enter valid marks (0-100) for all subjects!');
+                    return;
+                }
+            }
+
+            const total = calculateTotal(marks);
+            const average = calculateAverage(total, marks.length);
+            const percentage = calculatePercentage(total, marks.length * 100);
+            const grade = determineGrade(percentage);
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            resultDiv.innerHTML = `
+                <div class="result-item">
+                    <span class="result-label">Total Marks:</span>
+                    <span class="result-value">${total} / ${marks.length * 100}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Average:</span>
+                    <span class="result-value">${average.toFixed(2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Percentage:</span>
+                    <span class="result-value">${percentage.toFixed(2)}%</span>
+                </div>
+                <div class="grade-box">
+                    <div class="grade-label">Grade</div>
+                    <div class="grade-value grade-${grade}">${grade}</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

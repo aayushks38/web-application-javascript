@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 11 - Count Digits</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        .result-text {
+            font-size: 1.3em;
+            color: #333;
+            margin: 10px 0;
+        }
+        .number-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+            word-wrap: break-word;
+        }
+        .digit-count {
+            font-size: 3em;
+            font-weight: bold;
+            color: #28a745;
+            margin: 20px 0;
+        }
+        .process {
+            font-size: 1em;
+            color: #666;
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 11</h1>
+        <p class="subtitle">Count Number of Digits</p>
+        
+        <div class="input-group">
+            <label for="number">Enter a Number:</label>
+            <input type="number" id="number" placeholder="Enter any integer">
+        </div>
+        
+        <button class="btn" onclick="countDigits()">Count Digits</button>
+        
+        <div class="result" id="result"></div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        // Function to count digits using while loop
+        function countNumberOfDigits(number) {
+            // Handle negative numbers
+            number = Math.abs(number);
+            
+            // Special case for 0
+            if (number === 0) {
+                return 1;
+            }
+            
+            let count = 0;
+            let temp = number;
+            
+            while (temp > 0) {
+                temp = Math.floor(temp / 10);
+                count++;
+            }
+            
+            return count;
+        }
+
+        // Function to show the process
+        function getProcess(number) {
+            number = Math.abs(number);
+            
+            if (number === 0) {
+                return "The number 0 has 1 digit.";
+            }
+            
+            let steps = [];
+            let temp = number;
+            let count = 0;
+            
+            steps.push(`Starting with number: ${number}`);
+            
+            while (temp > 0) {
+                count++;
+                let nextTemp = Math.floor(temp / 10);
+                steps.push(`Step ${count}: ${temp} ÷ 10 = ${nextTemp}`);
+                temp = nextTemp;
+            }
+            
+            steps.push(`Total digits: ${count}`);
+            
+            return steps.join('<br>');
+        }
+
+        // Main function to count and display digits
+        function countDigits() {
+            const number = parseInt(document.getElementById('number').value);
+            
+            if (isNaN(number)) {
+                alert('Please enter a valid number!');
+                return;
+            }
+
+            const digitCount = countNumberOfDigits(number);
+            const process = getProcess(number);
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            
+            resultDiv.innerHTML = `
+                <div class="result-text">Number:</div>
+                <div class="number-display">${number}</div>
+                <div class="result-text">Total Digits:</div>
+                <div class="digit-count">${digitCount}</div>
+                <div class="process"><strong>Process:</strong><br>${process}</div>
+            `;
+        }
+
+        // Allow Enter key to trigger counting
+        document.getElementById('number').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                countDigits();
+            }
+        });
+    </script>
+</body>
+</html>

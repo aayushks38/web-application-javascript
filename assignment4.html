@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 4 - Temperature Converter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .converter-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            display: none;
+        }
+        .result-value {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 4</h1>
+        <p class="subtitle">Temperature Converter</p>
+        
+        <div class="converter-section">
+            <h3 style="color: #667eea; margin-bottom: 15px;">Celsius to Fahrenheit</h3>
+            <div class="input-group">
+                <label for="celsius">Temperature in Celsius (°C):</label>
+                <input type="number" id="celsius" placeholder="Enter temperature in Celsius" step="0.1">
+            </div>
+            <button class="btn" onclick="convertToFahrenheit()">Convert to Fahrenheit</button>
+            <div class="result" id="fahrenheitResult"></div>
+        </div>
+        
+        <div class="converter-section">
+            <h3 style="color: #667eea; margin-bottom: 15px;">Fahrenheit to Celsius</h3>
+            <div class="input-group">
+                <label for="fahrenheit">Temperature in Fahrenheit (°F):</label>
+                <input type="number" id="fahrenheit" placeholder="Enter temperature in Fahrenheit" step="0.1">
+            </div>
+            <button class="btn" onclick="convertToCelsius()">Convert to Celsius</button>
+            <div class="result" id="celsiusResult"></div>
+        </div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        // Function to convert Celsius to Fahrenheit
+        function celsiusToFahrenheit(celsius) {
+            return (celsius * 9/5) + 32;
+        }
+
+        // Function to convert Fahrenheit to Celsius
+        function fahrenheitToCelsius(fahrenheit) {
+            return (fahrenheit - 32) * 5/9;
+        }
+
+        // Convert Celsius to Fahrenheit
+        function convertToFahrenheit() {
+            const celsius = parseFloat(document.getElementById('celsius').value);
+            
+            if (isNaN(celsius)) {
+                alert('Please enter a valid temperature!');
+                return;
+            }
+
+            const fahrenheit = celsiusToFahrenheit(celsius);
+            const resultDiv = document.getElementById('fahrenheitResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <div>${celsius}°C = <span class="result-value">${fahrenheit.toFixed(2)}°F</span></div>
+            `;
+        }
+
+        // Convert Fahrenheit to Celsius
+        function convertToCelsius() {
+            const fahrenheit = parseFloat(document.getElementById('fahrenheit').value);
+            
+            if (isNaN(fahrenheit)) {
+                alert('Please enter a valid temperature!');
+                return;
+            }
+
+            const celsius = fahrenheitToCelsius(fahrenheit);
+            const resultDiv = document.getElementById('celsiusResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <div>${fahrenheit}°F = <span class="result-value">${celsius.toFixed(2)}°C</span></div>
+            `;
+        }
+    </script>
+</body>
+</html>

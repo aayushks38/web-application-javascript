@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2 - Arithmetic Operations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        .result-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .operation {
+            font-weight: bold;
+            color: #667eea;
+        }
+        .value {
+            font-size: 1.2em;
+            color: #333;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 2</h1>
+        <p class="subtitle">Arithmetic Operations using Functions</p>
+        
+        <div class="input-group">
+            <label for="num1">First Number:</label>
+            <input type="number" id="num1" placeholder="Enter first number">
+        </div>
+        
+        <div class="input-group">
+            <label for="num2">Second Number:</label>
+            <input type="number" id="num2" placeholder="Enter second number">
+        </div>
+        
+        <button class="btn" onclick="performOperations()">Calculate All Operations</button>
+        
+        <div class="results" id="results"></div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        // Function for addition
+        function add(a, b) {
+            return a + b;
+        }
+
+        // Function for subtraction
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        // Function for multiplication
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        // Function for division
+        function divide(a, b) {
+            if (b === 0) {
+                return "Cannot divide by zero";
+            }
+            return a / b;
+        }
+
+        // Function for modulus
+        function modulus(a, b) {
+            if (b === 0) {
+                return "Cannot perform modulus with zero";
+            }
+            return a % b;
+        }
+
+        // Function to perform all operations
+        function performOperations() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Please enter valid numbers!');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
+            
+            resultsDiv.innerHTML = `
+                <h3>Results:</h3>
+                <div class="result-item">
+                    <span class="operation">Addition:</span>
+                    <span class="value">${num1} + ${num2} = ${add(num1, num2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="operation">Subtraction:</span>
+                    <span class="value">${num1} - ${num2} = ${subtract(num1, num2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="operation">Multiplication:</span>
+                    <span class="value">${num1} × ${num2} = ${multiply(num1, num2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="operation">Division:</span>
+                    <span class="value">${num1} ÷ ${num2} = ${divide(num1, num2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="operation">Modulus:</span>
+                    <span class="value">${num1} % ${num2} = ${modulus(num1, num2)}</span>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

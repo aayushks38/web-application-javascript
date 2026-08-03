@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 8 - Multiplication Table</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        .table-title {
+            text-align: center;
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .table-row {
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 1.1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        .table-row:hover {
+            transform: translateX(5px);
+        }
+        .equation {
+            color: #333;
+        }
+        .result-num {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 8</h1>
+        <p class="subtitle">Multiplication Table Generator</p>
+        
+        <div class="input-group">
+            <label for="number">Enter a Number:</label>
+            <input type="number" id="number" placeholder="Enter any number">
+        </div>
+        
+        <div class="input-group">
+            <label for="range">Table Range (default 10):</label>
+            <input type="number" id="range" placeholder="Enter range" value="10" min="1">
+        </div>
+        
+        <button class="btn" onclick="generateTable()">Generate Table</button>
+        
+        <div class="result" id="result"></div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        // Function to generate multiplication table using for loop
+        function multiplicationTable(number, range) {
+            let tableHTML = `<div class="table-title">Multiplication Table of ${number}</div>`;
+            
+            for (let i = 1; i <= range; i++) {
+                const result = number * i;
+                tableHTML += `
+                    <div class="table-row">
+                        <span class="equation">${number} × ${i}</span>
+                        <span class="result-num">${result}</span>
+                    </div>
+                `;
+            }
+            
+            return tableHTML;
+        }
+
+        // Main function to generate and display table
+        function generateTable() {
+            const number = parseFloat(document.getElementById('number').value);
+            let range = parseInt(document.getElementById('range').value);
+            
+            if (isNaN(number)) {
+                alert('Please enter a valid number!');
+                return;
+            }
+            
+            if (isNaN(range) || range < 1) {
+                range = 10; // Default range
+            }
+
+            const tableHTML = multiplicationTable(number, range);
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = tableHTML;
+        }
+
+        // Allow Enter key to trigger generation
+        document.getElementById('number').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                generateTable();
+            }
+        });
+        
+        document.getElementById('range').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                generateTable();
+            }
+        });
+    </script>
+</body>
+</html>

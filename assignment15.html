@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 15 - Dynamic Text Change</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .demo-box {
+            margin: 30px 0;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #dynamicText {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            transition: all 0.3s ease;
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 15</h1>
+        <p class="subtitle">Dynamic Text Change using DOM Manipulation</p>
+        
+        <div class="demo-box">
+            <p id="dynamicText">Hello! This text will change dynamically.</p>
+        </div>
+        
+        <div class="input-group">
+            <label for="newText">Enter New Text:</label>
+            <input type="text" id="newText" placeholder="Type your custom text here">
+        </div>
+        
+        <button class="btn" onclick="changeText()">Change Text</button>
+        
+        <h3 style="margin-top: 30px; color: #667eea;">Quick Change Options:</h3>
+        <div class="btn-group">
+            <button class="btn" onclick="setPresetText('Welcome to JavaScript!')">Preset 1</button>
+            <button class="btn" onclick="setPresetText('DOM Manipulation is Powerful!')">Preset 2</button>
+            <button class="btn" onclick="setPresetText('Learning JavaScript is Fun!')">Preset 3</button>
+            <button class="btn" onclick="setPresetText('Interactive Web Pages!')">Preset 4</button>
+            <button class="btn" onclick="changeColor()">Random Color</button>
+            <button class="btn" onclick="toggleSize()">Toggle Size</button>
+            <button class="btn" onclick="resetText()">Reset</button>
+        </div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        const originalText = "Hello! This text will change dynamically.";
+        let isLarge = false;
+
+        // Function to change text using DOM manipulation
+        function changeText() {
+            const newText = document.getElementById('newText').value;
+            
+            if (newText.trim() === '') {
+                alert('Please enter some text!');
+                return;
+            }
+            
+            // Change the text using DOM manipulation
+            document.getElementById('dynamicText').textContent = newText;
+            
+            // Clear input field
+            document.getElementById('newText').value = '';
+        }
+
+        // Function to set preset text
+        function setPresetText(text) {
+            document.getElementById('dynamicText').textContent = text;
+        }
+
+        // Function to change text color randomly
+        function changeColor() {
+            const colors = ['#667eea', '#764ba2', '#28a745', '#dc3545', '#ffc107', '#17a2b8'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById('dynamicText').style.color = randomColor;
+        }
+
+        // Function to toggle text size
+        function toggleSize() {
+            const textElement = document.getElementById('dynamicText');
+            if (isLarge) {
+                textElement.style.fontSize = '2em';
+                isLarge = false;
+            } else {
+                textElement.style.fontSize = '3em';
+                isLarge = true;
+            }
+        }
+
+        // Function to reset to original text
+        function resetText() {
+            const textElement = document.getElementById('dynamicText');
+            textElement.textContent = originalText;
+            textElement.style.color = '#667eea';
+            textElement.style.fontSize = '2em';
+            isLarge = false;
+        }
+
+        // Allow Enter key to change text
+        document.getElementById('newText').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                changeText();
+            }
+        });
+    </script>
+</body>
+</html>

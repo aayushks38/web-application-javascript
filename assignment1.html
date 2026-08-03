@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1 - Variables & Data Types</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .result-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+        .variable-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .var-name {
+            font-weight: bold;
+            color: #667eea;
+        }
+        .var-type {
+            color: #764ba2;
+            font-style: italic;
+        }
+        .var-value {
+            color: #333;
+            margin-top: 5px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 1</h1>
+        <p class="subtitle">Variables & Data Types</p>
+        
+        <div class="result-box" id="results"></div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        // Declare variables of different data types
+        let stringVar = "Hello, JavaScript!";
+        let numberVar = 42;
+        let floatVar = 3.14159;
+        let booleanVar = true;
+        let nullVar = null;
+        let undefinedVar;
+        let objectVar = { name: "John", age: 25 };
+        let arrayVar = [1, 2, 3, 4, 5];
+        let dateVar = new Date();
+
+        // Function to display variables
+        function displayVariables() {
+            const resultsDiv = document.getElementById('results');
+            
+            const variables = [
+                { name: 'stringVar', value: stringVar, type: typeof stringVar },
+                { name: 'numberVar', value: numberVar, type: typeof numberVar },
+                { name: 'floatVar', value: floatVar, type: typeof floatVar },
+                { name: 'booleanVar', value: booleanVar, type: typeof booleanVar },
+                { name: 'nullVar', value: nullVar, type: typeof nullVar },
+                { name: 'undefinedVar', value: undefinedVar, type: typeof undefinedVar },
+                { name: 'objectVar', value: JSON.stringify(objectVar), type: typeof objectVar },
+                { name: 'arrayVar', value: JSON.stringify(arrayVar), type: typeof arrayVar },
+                { name: 'dateVar', value: dateVar.toString(), type: typeof dateVar }
+            ];
+
+            let html = '<h3>Variables and Their Data Types:</h3>';
+            
+            variables.forEach(variable => {
+                html += `
+                    <div class="variable-item">
+                        <div class="var-name">Variable: ${variable.name}</div>
+                        <div class="var-type">Type: ${variable.type}</div>
+                        <div class="var-value">Value: ${variable.value}</div>
+                    </div>
+                `;
+            });
+
+            resultsDiv.innerHTML = html;
+        }
+
+        // Display variables when page loads
+        displayVariables();
+    </script>
+</body>
+</html>

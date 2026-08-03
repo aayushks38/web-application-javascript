@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 16 - Background Color Changer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .color-display {
+            margin: 30px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .current-color {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+        .color-code {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+        }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn-red { background: #dc3545; }
+        .btn-green { background: #28a745; }
+        .btn-blue { background: #007bff; }
+        .btn-purple { background: #6f42c1; }
+        .btn-orange { background: #fd7e14; }
+        .btn-teal { background: #20c997; }
+        .btn-pink { background: #e83e8c; }
+        .btn-yellow { background: #ffc107; color: #333; }
+        .btn-random {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            grid-column: 1 / -1;
+        }
+        .btn-reset {
+            background: #6c757d;
+            grid-column: 1 / -1;
+        }
+        .custom-color {
+            margin: 20px 0;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        input[type="color"] {
+            width: 60px;
+            height: 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 16</h1>
+        <p class="subtitle">Background Color Changer using DOM Manipulation</p>
+        
+        <div class="color-display">
+            <div class="current-color">Current Background Color:</div>
+            <div class="color-code" id="colorCode">#667eea</div>
+        </div>
+        
+        <h3 style="color: #667eea; margin-bottom: 15px;">Preset Colors:</h3>
+        <div class="btn-grid">
+            <button class="btn btn-red" onclick="changeBackground('#dc3545')">Red</button>
+            <button class="btn btn-green" onclick="changeBackground('#28a745')">Green</button>
+            <button class="btn btn-blue" onclick="changeBackground('#007bff')">Blue</button>
+            <button class="btn btn-purple" onclick="changeBackground('#6f42c1')">Purple</button>
+            <button class="btn btn-orange" onclick="changeBackground('#fd7e14')">Orange</button>
+            <button class="btn btn-teal" onclick="changeBackground('#20c997')">Teal</button>
+            <button class="btn btn-pink" onclick="changeBackground('#e83e8c')">Pink</button>
+            <button class="btn btn-yellow" onclick="changeBackground('#ffc107')">Yellow</button>
+            <button class="btn btn-random" onclick="randomColor()">Random Color</button>
+            <button class="btn btn-reset" onclick="resetBackground()">Reset to Default</button>
+        </div>
+        
+        <h3 style="color: #667eea; margin: 20px 0 15px 0;">Custom Color:</h3>
+        <div class="custom-color">
+            <div class="input-group">
+                <input type="color" id="colorPicker" value="#667eea" onchange="updateFromPicker()">
+                <input type="text" id="customColor" placeholder="Enter hex color (e.g., #ff5733)">
+                <button class="btn" style="background: #667eea;" onclick="changeFromInput()">Apply</button>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        const defaultColor = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        
+        // Function to change background color using DOM manipulation
+        function changeBackground(color) {
+            document.body.style.background = color;
+            document.getElementById('colorCode').textContent = color;
+        }
+
+        // Function to generate random color
+        function randomColor() {
+            const randomHex = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+            changeBackground(randomHex);
+        }
+
+        // Function to update from color picker
+        function updateFromPicker() {
+            const color = document.getElementById('colorPicker').value;
+            changeBackground(color);
+            document.getElementById('customColor').value = color;
+        }
+
+        // Function to change from text input
+        function changeFromInput() {
+            const color = document.getElementById('customColor').value.trim();
+            
+            if (color === '') {
+                alert('Please enter a color code!');
+                return;
+            }
+            
+            // Validate hex color format
+            if (!/^#[0-9A-F]{6}$/i.test(color)) {
+                alert('Please enter a valid hex color code (e.g., #ff5733)');
+                return;
+            }
+            
+            changeBackground(color);
+            document.getElementById('colorPicker').value = color;
+        }
+
+        // Function to reset background
+        function resetBackground() {
+            document.body.style.background = defaultColor;
+            document.getElementById('colorCode').textContent = 'Gradient (Default)';
+            document.getElementById('colorPicker').value = '#667eea';
+            document.getElementById('customColor').value = '';
+        }
+
+        // Allow Enter key in custom color input
+        document.getElementById('customColor').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                changeFromInput();
+            }
+        });
+    </script>
+</body>
+</html>

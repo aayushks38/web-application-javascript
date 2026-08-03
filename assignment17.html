@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 17 - Form Input Display</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .form-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+            font-family: inherit;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .radio-item input, .checkbox-item input {
+            width: auto;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn:hover {
+            background: #764ba2;
+        }
+        .btn-clear {
+            background: #6c757d;
+            margin-top: 10px;
+        }
+        .output-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            display: none;
+        }
+        .output-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .output-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .output-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .output-value {
+            color: #333;
+            font-size: 1.1em;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .back-btn:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assignment 17</h1>
+        <p class="subtitle">Form Input Display using DOM</p>
+        
+        <div class="form-section">
+            <h3 style="color: #667eea; margin-bottom: 20px;">User Information Form</h3>
+            
+            <div class="input-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" placeholder="Enter your full name">
+            </div>
+            
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            
+            <div class="input-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" placeholder="Enter your phone number">
+            </div>
+            
+            <div class="input-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" placeholder="Enter your age" min="1">
+            </div>
+            
+            <div class="input-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="male" name="gender" value="Male">
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="female" name="gender" value="Female">
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="other" name="gender" value="Other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="country">Country:</label>
+                <select id="country">
+                    <option value="">Select Country</option>
+                    <option value="India">India</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Hobbies:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="reading" value="Reading">
+                        <label for="reading">Reading</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="sports" value="Sports">
+                        <label for="sports">Sports</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="music" value="Music">
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="coding" value="Coding">
+                        <label for="coding">Coding</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="comments">Comments:</label>
+                <textarea id="comments" placeholder="Enter your comments"></textarea>
+            </div>
+            
+            <button class="btn" onclick="displayInformation()">Display Information</button>
+            <button class="btn btn-clear" onclick="clearForm()">Clear Form</button>
+        </div>
+        
+        <div class="output-section" id="outputSection"></div>
+        
+        <a href="index.html" class="back-btn">← Back to Index</a>
+    </div>
+
+    <script>
+        // Function to get selected gender
+        function getSelectedGender() {
+            const genderRadios = document.getElementsByName('gender');
+            for (let radio of genderRadios) {
+                if (radio.checked) {
+                    return radio.value;
+                }
+            }
+            return 'Not specified';
+        }
+
+        // Function to get selected hobbies
+        function getSelectedHobbies() {
+            const hobbies = [];
+            const checkboxes = ['reading', 'sports', 'music', 'coding'];
+            
+            for (let id of checkboxes) {
+                const checkbox = document.getElementById(id);
+                if (checkbox.checked) {
+                    hobbies.push(checkbox.value);
+                }
+            }
+            
+            return hobbies.length > 0 ? hobbies.join(', ') : 'None selected';
+        }
+
+        // Function to display information using DOM manipulation
+        function displayInformation() {
+            // Get all form values
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const age = document.getElementById('age').value;
+            const gender = getSelectedGender();
+            const country = document.getElementById('country').value;
+            const hobbies = getSelectedHobbies();
+            const comments = document.getElementById('comments').value;
+            
+            // Validate required fields
+            if (!fullName || !email) {
+                alert('Please fill in at least Name and Email!');
+                return;
+            }
+            
+            // Display information using DOM manipulation
+            const outputSection = document.getElementById('outputSection');
+            outputSection.style.display = 'block';
+            
+            outputSection.innerHTML = `
+                <div class="output-title">Your Information</div>
+                
+                <div class="output-item">
+                    <div class="output-label">Full Name:</div>
+                    <div class="output-value">${fullName || 'Not provided'}</div>
+                </div>
+                
+                <div class="output-item">
+                    <div class="output-label">Email:</div>
+                    <div class="output-value">${email || 'Not provided'}</div>
+                </div>
+                
+                <div class="output-item">
+                    <div class="output-label">Phone Number:</div>
+                    <div class="output-value">${phone || 'Not provided'}</div>
+                </div>
+                
+                <div class="output-item">
+                    <div class="output-label">Age:</div>
+                    <div class="output-value">${age || 'Not provided'}</div>
+                </div>
+                
+                <div class="output-item">
+                    <div class="output-label">Gender:</div>
+                    <div class="output-value">${gender}</div>
+                </div>
+                
+                <div class="output-item">
+                    <div class="output-label">Country:</div>
+                    <div class="output-value">${country || 'Not selected'}</div>
+                </div>
+                
+                <div class="output-item">
+                    <div class="output-label">Hobbies:</div>
+                    <div class="output-value">${hobbies}</div>
+                </div>
+                
+                <div class="output-item">
+                    <div class="output-label">Comments:</div>
+                    <div class="output-value">${comments || 'No comments'}</div>
+                </div>
+            `;
+            
+            // Scroll to output
+            outputSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Function to clear form
+        function clearForm() {
+            document.getElementById('fullName').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('country').value = '';
+            document.getElementById('comments').value = '';
+            
+            // Clear radio buttons
+            const genderRadios = document.getElementsByName('gender');
+            for (let radio of genderRadios) {
+                radio.checked = false;
+            }
+            
+            // Clear checkboxes
+            document.getElementById('reading').checked = false;
+            document.getElementById('sports').checked = false;
+            document.getElementById('music').checked = false;
+            document.getElementById('coding').checked = false;
+            
+            // Hide output
+            document.getElementById('outputSection').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

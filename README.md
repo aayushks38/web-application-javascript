@@ -62,27 +62,27 @@ Simply open `index.html` in any web browser. The main page displays all 20 assig
 web-application-javascript/
 │
 ├── index.html              # Main navigation page
-├── assignment1.html        # Variables & Data Types
-├── assignment2.html        # Arithmetic Operations
-├── assignment3.html        # Rectangle Calculator
-├── assignment4.html        # Temperature Converter
-├── assignment5.html        # Even or Odd Checker
-├── assignment6.html        # Largest of Three
-├── assignment7.html        # Factorial Calculator
-├── assignment8.html        # Multiplication Table
-├── assignment9.html        # Sum of Natural Numbers
-├── assignment10.html       # Prime Number Checker
-├── assignment11.html       # Count Digits
-├── assignment12.html       # Reverse Number
-├── assignment13.html       # Calculator with Switch
-├── assignment14.html       # Student Grade Calculator
-├── assignment15.html       # Dynamic Text Change
-├── assignment16.html       # Background Color Changer
-├── assignment17.html       # Form Input Display
-├── assignment18.html       # Counter App
-├── assignment19.html       # Even & Odd Display
-├── assignment20.html       # Web Calculator
-└── README.md              # This file
+├── question1.html          # Variables & Data Types
+├── question2.html          # Arithmetic Operations
+├── question3.html          # Rectangle Calculator
+├── question4.html          # Temperature Converter
+├── question5.html          # Even or Odd Checker
+├── question6.html          # Largest of Three
+├── question7.html          # Factorial Calculator
+├── question8.html          # Multiplication Table
+├── question9.html          # Sum of Natural Numbers
+├── question10.html         # Prime Number Checker
+├── question11.html         # Count Digits
+├── question12.html         # Reverse Number
+├── question13.html         # Calculator with Switch
+├── question14.html         # Student Grade Calculator
+├── question15.html         # Dynamic Text Change
+├── question16.html         # Background Color Changer
+├── question17.html         # Form Input Display
+├── question18.html         # Counter App
+├── question19.html         # Even & Odd Display
+├── question20.html         # Web Calculator
+└── README.md               # This file
 ```
 
 ## 🎨 Features

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment 6 - Largest of Three Numbers</title>
+    <title>Question 2 - Arithmetic Operations</title>
     <style>
         * {
             margin: 0;
@@ -63,53 +63,34 @@
             cursor: pointer;
             transition: background 0.3s;
             margin-top: 10px;
-            width: 100%;
         }
         .btn:hover {
             background: #764ba2;
         }
-        .result {
+        .results {
             margin-top: 30px;
-            padding: 30px;
+            padding: 20px;
             background: #f8f9fa;
             border-radius: 10px;
-            text-align: center;
             display: none;
         }
-        .numbers-display {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-        .number-box {
-            padding: 20px;
+        .result-item {
+            padding: 15px;
+            margin: 10px 0;
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .number-label {
-            color: #666;
-            font-size: 0.9em;
-        }
-        .number-value {
-            font-size: 2em;
+        .operation {
             font-weight: bold;
             color: #667eea;
-            margin-top: 5px;
         }
-        .largest-number {
-            color: #28a745 !important;
-        }
-        .result-text {
-            font-size: 1.3em;
+        .value {
+            font-size: 1.2em;
             color: #333;
-            margin-top: 20px;
-        }
-        .largest-value {
-            font-size: 3em;
-            font-weight: bold;
-            color: #28a745;
-            margin: 20px 0;
         }
         .back-btn {
             display: inline-block;
@@ -128,8 +109,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Assignment 6</h1>
-        <p class="subtitle">Find Largest of Three Numbers</p>
+        <h1>Question 2</h1>
+        <p class="subtitle">Arithmetic Operations using Functions</p>
         
         <div class="input-group">
             <label for="num1">First Number:</label>
@@ -141,68 +122,80 @@
             <input type="number" id="num2" placeholder="Enter second number">
         </div>
         
-        <div class="input-group">
-            <label for="num3">Third Number:</label>
-            <input type="number" id="num3" placeholder="Enter third number">
-        </div>
+        <button class="btn" onclick="performOperations()">Calculate All Operations</button>
         
-        <button class="btn" onclick="findLargest()">Find Largest Number</button>
-        
-        <div class="result" id="result"></div>
+        <div class="results" id="results"></div>
         
         <a href="index.html" class="back-btn">← Back to Index</a>
     </div>
 
     <script>
-        // Function to find largest of three numbers using if-else
-        function findLargestNumber(num1, num2, num3) {
-            let largest;
-            
-            if (num1 >= num2 && num1 >= num3) {
-                largest = num1;
-            } else if (num2 >= num1 && num2 >= num3) {
-                largest = num2;
-            } else {
-                largest = num3;
-            }
-            
-            return largest;
+        // Function for addition
+        function add(a, b) {
+            return a + b;
         }
 
-        // Main function to get inputs and display result
-        function findLargest() {
+        // Function for subtraction
+        function subtract(a, b) {
+            return a - b;
+        }
+
+        // Function for multiplication
+        function multiply(a, b) {
+            return a * b;
+        }
+
+        // Function for division
+        function divide(a, b) {
+            if (b === 0) {
+                return "Cannot divide by zero";
+            }
+            return a / b;
+        }
+
+        // Function for modulus
+        function modulus(a, b) {
+            if (b === 0) {
+                return "Cannot perform modulus with zero";
+            }
+            return a % b;
+        }
+
+        // Function to perform all operations
+        function performOperations() {
             const num1 = parseFloat(document.getElementById('num1').value);
             const num2 = parseFloat(document.getElementById('num2').value);
-            const num3 = parseFloat(document.getElementById('num3').value);
             
-            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
-                alert('Please enter valid numbers in all fields!');
+            if (isNaN(num1) || isNaN(num2)) {
+                alert('Please enter valid numbers!');
                 return;
             }
 
-            const largest = findLargestNumber(num1, num2, num3);
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
             
-            const resultDiv = document.getElementById('result');
-            resultDiv.style.display = 'block';
-            
-            resultDiv.innerHTML = `
-                <h3>Numbers Entered:</h3>
-                <div class="numbers-display">
-                    <div class="number-box">
-                        <div class="number-label">First Number</div>
-                        <div class="number-value ${num1 === largest ? 'largest-number' : ''}">${num1}</div>
-                    </div>
-                    <div class="number-box">
-                        <div class="number-label">Second Number</div>
-                        <div class="number-value ${num2 === largest ? 'largest-number' : ''}">${num2}</div>
-                    </div>
-                    <div class="number-box">
-                        <div class="number-label">Third Number</div>
-                        <div class="number-value ${num3 === largest ? 'largest-number' : ''}">${num3}</div>
-                    </div>
+            resultsDiv.innerHTML = `
+                <h3>Results:</h3>
+                <div class="result-item">
+                    <span class="operation">Addition:</span>
+                    <span class="value">${num1} + ${num2} = ${add(num1, num2)}</span>
                 </div>
-                <div class="result-text">The Largest Number is:</div>
-                <div class="largest-value">${largest}</div>
+                <div class="result-item">
+                    <span class="operation">Subtraction:</span>
+                    <span class="value">${num1} - ${num2} = ${subtract(num1, num2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="operation">Multiplication:</span>
+                    <span class="value">${num1} × ${num2} = ${multiply(num1, num2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="operation">Division:</span>
+                    <span class="value">${num1} ÷ ${num2} = ${divide(num1, num2)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="operation">Modulus:</span>
+                    <span class="value">${num1} % ${num2} = ${modulus(num1, num2)}</span>
+                </div>
             `;
         }
     </script>
